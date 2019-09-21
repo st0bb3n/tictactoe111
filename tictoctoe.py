@@ -6,42 +6,52 @@ Created on Wed Sep 18 18:32:00 2019
 """
 import sys
 
-board = [['*', '*', '*'],
+board = [['*', '*', '*'], #Global board, updating
          ['*', '*', '*'],
          ['*', '*', '*']]
 
 n = 9
 
-def initBoard():
-    #board = [['*', '*', '*'],
-      #       ['*', '*', '*'],
-       #      ['*', '*', '*']]
+def main(): #main menu
+    print('1 - Play')
+    print('2 - Show empty board with coordinates')
+    print('')
+    print('3 - Exit')
+    print('')
+
+    selector = int(input(''))
+
+    if selector == 1:
+        player1()
+    elif selector == 2:
+        printBoard()
+    elif selector == 3:
+        print("Exiting")
+        sys.exit(0)
+    else:
+        print("Invalid")
+        main()
+
+def initBoard(): #initializes board
     print(board[0])
     print(board[1])
     print(board[2])
     
-def printBoard():
-    empty = [[],
-             [],
-             []]
+def printBoard(): #intializes empty board
+    empty = [['00', '01', '02'], #empty board with coordinates
+            ['10', '11', '12'],
+            ['20', '21', '22']]
     print(empty[0])
     print(empty[1])
     print(empty[2])
+    print('')
+    main()
     
-def boardfilled():
+def boardfilled(): #checker for board content
     print("Board is filled")
     return 0
-#def isFilled():
- #   ctr = 0
-  #  for a in (0,3):
-   #     if board[a] == 'X' or 'O':
-    #        ctr += 1
-    #if ctr == 9:
-     #   print("EMPTY")
-    #else:
-     #   winCheck()
     
-def placePiece(board,row,col,piece):
+def placePiece(board,row,col,piece): #placepiece for player 1
     if board[row][col] == '*' and (row == 0 or row == 1 or row == 2) and ( col == 0 or col == 1 or col == 2) and (piece == 'X' or piece == 'O'):
         board[row][col] = piece
         winCheck(board,piece)
@@ -50,7 +60,7 @@ def placePiece(board,row,col,piece):
         player1()
         return -1
         
-def placePiece2(board,row,col,piece):
+def placePiece2(board,row,col,piece): #placepiece for player 2
     if board[row][col] == '*' and (row == 0 or row == 1 or row == 2) and ( col == 0 or col == 1 or col == 2) and (piece == 'X' or piece == 'O'):
         board[row][col] = piece
         winCheck2(board,piece)
@@ -59,7 +69,7 @@ def placePiece2(board,row,col,piece):
         player2()
         return -1
     
-def winCheck(board,piece):
+def winCheck(board,piece): #win conditions for player 1
     if board[0][0] == piece and board[0][1] == piece and board[0][2] == piece:
         print(piece, "win")
         return -1
@@ -90,7 +100,7 @@ def winCheck(board,piece):
         player2()
         return -1
         
-def winCheck2(board,piece):
+def winCheck2(board,piece): #winconditions for player 2
     if board[0][0] == piece and board[0][1] == piece and board[0][2] == piece:
         print(piece, "win")
         return -1
@@ -121,7 +131,7 @@ def winCheck2(board,piece):
         player1()
         return -1
         
-def player1():
+def player1(): #player 1 algo
     print(board[0])
     print(board[1])
     print(board[2])
@@ -139,7 +149,7 @@ def player1():
     #winCheck(board,piece)
     
 
-def player2():
+def player2(): #player 2 algo
     print(board[0])
     print(board[1])
     print(board[2])
@@ -154,6 +164,8 @@ def player2():
         player2()
     #isFilled()
     #winCheck2(board,piece)
-    
-player1()
-        
+
+
+if __name__ == "__main__": #pycharm runs it if this was set xdddddd
+    main()
+
