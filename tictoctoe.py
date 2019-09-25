@@ -6,9 +6,9 @@ Created on Wed Sep 18 18:32:00 2019
 """
 import sys
 
-board = [['*', '*', '*'], #Global board, updating
-         ['*', '*', '*'],
-         ['*', '*', '*']]
+board = [['|_|', '|_|', '|_|'], #Global board, updating
+         ['|_|', '|_|', '|_|'],
+         ['|_|', '|_|', '|_|']]
 
 n = 9
 
@@ -33,9 +33,11 @@ def main(): #main menu
         main()
 
 def initBoard(): #initializes board
-    print(board[0])
-    print(board[1])
-    print(board[2])
+    print('------------')
+    print(*board[0], sep='')
+    print(*board[1], sep='')
+    print(*board[2], sep='')
+    print('------------')
     
 def printBoard(): #intializes empty board
     empty = [['00', '01', '02'], #empty board with coordinates
@@ -52,20 +54,20 @@ def boardfilled(): #checker for board content
     return 0
     
 def placePiece(board,row,col,piece): #placepiece for player 1
-    if board[row][col] == '*' and (row == 0 or row == 1 or row == 2) and ( col == 0 or col == 1 or col == 2) and (piece == 'X' or piece == 'O'):
+    if board[row][col] == '|_|' and (row == 0 or row == 1 or row == 2) and ( col == 0 or col == 1 or col == 2) and (piece == '|X|' or piece == '|O|'):
         board[row][col] = piece
         winCheck(board,piece)
         return -1
-    elif board[row][col] == 'X' or 'O':
+    elif board[row][col] == '|X|' or '|O|':
         player1()
         return -1
         
 def placePiece2(board,row,col,piece): #placepiece for player 2
-    if board[row][col] == '*' and (row == 0 or row == 1 or row == 2) and ( col == 0 or col == 1 or col == 2) and (piece == 'X' or piece == 'O'):
+    if board[row][col] == '|_|' and (row == 0 or row == 1 or row == 2) and ( col == 0 or col == 1 or col == 2) and (piece == '|X|' or piece == '|O|'):
         board[row][col] = piece
         winCheck2(board,piece)
         return -1
-    elif board[row][col] == 'X' or 'O':
+    elif board[row][col] == '|X|' or '|O|':
         player2()
         return -1
     
@@ -94,7 +96,7 @@ def winCheck(board,piece): #win conditions for player 1
     elif board[0][2] == piece and board[1][2] == piece and board[2][2] == piece:
         print(piece, "win")
         return -1
-    elif board[0][0] != '*' and board[0][1] != '*' and board[0][2] != '*' and board[1][0] != '*' and board[1][1] != '*' and board[1][2] != '*' and board[2][0] != '*' and board[2][1] != '*' and board[2][2] != '*':
+    elif board[0][0] != '|_|' and board[0][1] != '|_|' and board[0][2] != '|_|' and board[1][0] != '|_|' and board[1][1] != '|_|' and board[1][2] != '|_|' and board[2][0] != '|_|' and board[2][1] != '|_|' and board[2][2] != '|_|':
         boardfilled()
     else:
         player2()
@@ -125,23 +127,25 @@ def winCheck2(board,piece): #winconditions for player 2
     elif board[0][2] == piece and board[1][2] == piece and board[2][2] == piece:
         print(piece, "win")
         return -1
-    elif board[0][0] != '*' and board[0][1] != '*' and board[0][2] != '*' and board[1][0] != '*' and board[1][1] != '*' and board[1][2] != '*' and board[2][0] != '*' and board[2][1] != '*' and board[2][2] != '*':
+    elif board[0][0] != '|_|' and board[0][1] != '|_|' and board[0][2] != '|_|' and board[1][0] != '|_|' and board[1][1] != '|_|' and board[1][2] != '|_|' and board[2][0] != '|_|' and board[2][1] != '|_|' and board[2][2] != '|_|':
         boardfilled()
     else:
         player1()
         return -1
         
 def player1(): #player 1 algo
-    print(board[0])
-    print(board[1])
-    print(board[2])
+    print('------------')
+    print(*board[0], sep='')
+    print(*board[1], sep='')
+    print(*board[2], sep='')
+    print('------------')
     print("X turn")
     x1 = int(input("ROW: "))
     y1 = int(input("COL: "))
     #piece = str(input("X or O case sensitive: "))
     #piece = 'X'
     if (x1 == 0 or x1 == 1 or x1 == 2) and (y1 == 0 or y1 == 1 or y1 == 2):
-        placePiece(board,x1,y1,'X')
+        placePiece(board,x1,y1,'|X|')
     else: 
         print("inv")
         player1()
@@ -150,15 +154,17 @@ def player1(): #player 1 algo
     
 
 def player2(): #player 2 algo
-    print(board[0])
-    print(board[1])
-    print(board[2])
+    print('------------')
+    print(*board[0], sep='')
+    print(*board[1], sep='')
+    print(*board[2], sep='')
+    print('------------')
     print("O turn")
     x1 = int(input("ROW: "))
     y1 = int(input("COL: "))
     #piece = 'O'
     if (x1 == 0 or x1 == 1 or x1 == 2) and (y1 == 0 or y1 == 1 or y1 == 2):
-        placePiece2(board,x1,y1,'O')
+        placePiece2(board,x1,y1,'|O|')
     else: 
         print("inv")
         player2()
