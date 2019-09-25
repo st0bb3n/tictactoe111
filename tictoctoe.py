@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Created on Wed Sep 18 18:32:00 2019
-
-@author: Stob
+ST0BB3N
 """
 import sys
 
