@@ -1,15 +1,23 @@
 # -*- coding: utf-8 -*-
 """
-ST0BB3N
+Created on Thu Sep 26 10:02:05 2019
+
+@author: Steven Kyle Y Esguerra SN: 201905959
+@author2: Ivan Patrick Frondozo SN: 2019
 """
+
 import sys
 
+'''
+Main board, global
+'''
 board = [['|_|', '|_|', '|_|'], #Global board, updating
          ['|_|', '|_|', '|_|'],
          ['|_|', '|_|', '|_|']]
 
-n = 9
-
+'''
+Main menu function
+'''
 def main(): #main menu
     print('1 - Play')
     print('2 - Show empty board with coordinates')
@@ -30,6 +38,9 @@ def main(): #main menu
         print("Invalid")
         main()
 
+'''
+Prints empty board
+'''
 def initBoard(): #initializes board
     print('------------')
     print(*board[0], sep='')
@@ -37,6 +48,9 @@ def initBoard(): #initializes board
     print(*board[2], sep='')
     print('------------')
     
+'''
+Prints the board with corresponding coordinate
+'''    
 def printBoard(): #intializes empty board
     empty = [['00', '01', '02'], #empty board with coordinates
             ['10', '11', '12'],
@@ -46,20 +60,34 @@ def printBoard(): #intializes empty board
     print(empty[2])
     print('')
     main()
-    
+       
+'''
+Runs of board is filled
+'''    
 def boardfilled(): #checker for board content
+    print('------------')
+    print(*board[0], sep='')
+    print(*board[1], sep='')
+    print(*board[2], sep='')
+    print('------------')
     print("Board is filled")
     return 0
     
+'''
+Place piece function, dedicated to player 1
+'''
 def placePiece(board,row,col,piece): #placepiece for player 1
     if board[row][col] == '|_|' and (row == 0 or row == 1 or row == 2) and ( col == 0 or col == 1 or col == 2) and (piece == '|X|' or piece == '|O|'):
         board[row][col] = piece
         winCheck(board,piece)
-        return -1
+        return 0
     elif board[row][col] == '|X|' or '|O|':
         player1()
         return -1
         
+'''
+Place piece function, dedicated to player 2
+''' 
 def placePiece2(board,row,col,piece): #placepiece for player 2
     if board[row][col] == '|_|' and (row == 0 or row == 1 or row == 2) and ( col == 0 or col == 1 or col == 2) and (piece == '|X|' or piece == '|O|'):
         board[row][col] = piece
@@ -69,6 +97,9 @@ def placePiece2(board,row,col,piece): #placepiece for player 2
         player2()
         return -1
     
+'''
+Win conditions function, dedicated to player 1
+'''    
 def winCheck(board,piece): #win conditions for player 1
     if board[0][0] == piece and board[0][1] == piece and board[0][2] == piece:
         print(piece, "win")
@@ -100,6 +131,9 @@ def winCheck(board,piece): #win conditions for player 1
         player2()
         return -1
         
+'''
+Win conditions function, dedicated to player 2
+'''       
 def winCheck2(board,piece): #winconditions for player 2
     if board[0][0] == piece and board[0][1] == piece and board[0][2] == piece:
         print(piece, "win")
@@ -131,6 +165,9 @@ def winCheck2(board,piece): #winconditions for player 2
         player1()
         return -1
         
+'''
+Player 1 flow 
+'''    
 def player1(): #player 1 algo
     print('------------')
     print(*board[0], sep='')
@@ -145,12 +182,14 @@ def player1(): #player 1 algo
     if (x1 == 0 or x1 == 1 or x1 == 2) and (y1 == 0 or y1 == 1 or y1 == 2):
         placePiece(board,x1,y1,'|X|')
     else: 
-        print("inv")
+        print("Invalid, place a piece again")
         player1()
     #isFilled()
     #winCheck(board,piece)
     
-
+'''
+Player 2 flow
+'''
 def player2(): #player 2 algo
     print('------------')
     print(*board[0], sep='')
@@ -164,7 +203,7 @@ def player2(): #player 2 algo
     if (x1 == 0 or x1 == 1 or x1 == 2) and (y1 == 0 or y1 == 1 or y1 == 2):
         placePiece2(board,x1,y1,'|O|')
     else: 
-        print("inv")
+        print("Invalid, place a piece again")
         player2()
     #isFilled()
     #winCheck2(board,piece)
