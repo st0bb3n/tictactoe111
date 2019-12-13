@@ -3,7 +3,7 @@
 Created on Thu Sep 26 10:02:05 2019
 
 @author: Steven Kyle Y Esguerra SN: 201905959
-@author2: Ivan Patrick Frondozo SN: 201907500
+@author2: Ivan Patrick Frondozo SN: 2019
 """
 
 import sys
@@ -71,7 +71,7 @@ def boardfilled(): #checker for board content
     print(*board[2], sep='')
     print('------------')
     print("Board is filled")
-    return 0
+    main()
     
 '''
 Place piece function, dedicated to player 1
@@ -80,10 +80,8 @@ def placePiece(board,row,col,piece): #placepiece for player 1
     if board[row][col] == '|_|' and (row == 0 or row == 1 or row == 2) and ( col == 0 or col == 1 or col == 2) and (piece == '|X|' or piece == '|O|'):
         board[row][col] = piece
         winCheck(board,piece)
-        return 0
     elif board[row][col] == '|X|' or '|O|':
         player1()
-        return -1
         
 '''
 Place piece function, dedicated to player 2
@@ -92,10 +90,8 @@ def placePiece2(board,row,col,piece): #placepiece for player 2
     if board[row][col] == '|_|' and (row == 0 or row == 1 or row == 2) and ( col == 0 or col == 1 or col == 2) and (piece == '|X|' or piece == '|O|'):
         board[row][col] = piece
         winCheck2(board,piece)
-        return -1
     elif board[row][col] == '|X|' or '|O|':
         player2()
-        return -1
     
 '''
 Win conditions function, dedicated to player 1
@@ -103,33 +99,24 @@ Win conditions function, dedicated to player 1
 def winCheck(board,piece): #win conditions for player 1
     if board[0][0] == piece and board[0][1] == piece and board[0][2] == piece:
         print(piece, "win")
-        return -1
     elif board[1][0] == piece and board[1][1] == piece and board[1][2] == piece:
         print(piece, "win")
-        return -1
     elif board[2][0] == piece and board[2][1] == piece and board[2][2] == piece:
         print(piece, "win")
-        return -1
     elif board[0][0] == piece and board[1][1] == piece and board[2][2] == piece:
         print(piece, "win")
-        return -1
     elif board[0][2] == piece and board[1][1] == piece and board[2][0] == piece:
         print(piece, "win")
-        return -1
     elif board[0][0] == piece and board[1][0] == piece and board[2][0] == piece:
         print(piece, "win")
-        return -1
     elif board[0][1] == piece and board[1][1] == piece and board[2][1] == piece:
         print(piece, "win")
-        return -1
     elif board[0][2] == piece and board[1][2] == piece and board[2][2] == piece:
         print(piece, "win")
-        return -1
     elif board[0][0] != '|_|' and board[0][1] != '|_|' and board[0][2] != '|_|' and board[1][0] != '|_|' and board[1][1] != '|_|' and board[1][2] != '|_|' and board[2][0] != '|_|' and board[2][1] != '|_|' and board[2][2] != '|_|':
         boardfilled()
     else:
         player2()
-        return -1
         
 '''
 Win conditions function, dedicated to player 2
@@ -137,33 +124,24 @@ Win conditions function, dedicated to player 2
 def winCheck2(board,piece): #winconditions for player 2
     if board[0][0] == piece and board[0][1] == piece and board[0][2] == piece:
         print(piece, "win")
-        return -1
     elif board[1][0] == piece and board[1][1] == piece and board[1][2] == piece:
         print(piece, "win")
-        return -1
     elif board[2][0] == piece and board[2][1] == piece and board[2][2] == piece:
         print(piece, "win")
-        return -1
     elif board[0][0] == piece and board[1][1] == piece and board[2][2] == piece:
         print(piece, "win")
-        return -1
     elif board[0][2] == piece and board[1][1] == piece and board[2][0] == piece:
         print(piece, "win")
-        return -1
     elif board[0][0] == piece and board[1][0] == piece and board[2][0] == piece:
         print(piece, "win")
-        return -1
     elif board[0][1] == piece and board[1][1] == piece and board[2][1] == piece:
         print(piece, "win")
-        return -1
     elif board[0][2] == piece and board[1][2] == piece and board[2][2] == piece:
         print(piece, "win")
-        return -1
     elif board[0][0] != '|_|' and board[0][1] != '|_|' and board[0][2] != '|_|' and board[1][0] != '|_|' and board[1][1] != '|_|' and board[1][2] != '|_|' and board[2][0] != '|_|' and board[2][1] != '|_|' and board[2][2] != '|_|':
         boardfilled()
     else:
         player1()
-        return -1
         
 '''
 Player 1 flow 
@@ -175,14 +153,22 @@ def player1(): #player 1 algo
     print(*board[2], sep='')
     print('------------')
     print("X turn")
-    x1 = int(input("ROW: "))
-    y1 = int(input("COL: "))
+    try:
+        x1 = int(input("ROW: "))
+        y1 = int(input("COL: "))
+    except:
+        print("Invalid Input, try again")
+        player1()
     #piece = str(input("X or O case sensitive: "))
     #piece = 'X'
-    if (x1 == 0 or x1 == 1 or x1 == 2) and (y1 == 0 or y1 == 1 or y1 == 2):
-        placePiece(board,x1,y1,'|X|')
-    else: 
-        print("Invalid, place a piece again")
+    try:
+        if (x1 == 0 or x1 == 1 or x1 == 2) and (y1 == 0 or y1 == 1 or y1 == 2):
+            placePiece(board,x1,y1,'|X|')
+        else: 
+            print("Invalid, place a piece again")
+            player1()
+    except:
+        print("Invalid Input, try again")
         player1()
     #isFilled()
     #winCheck(board,piece)
@@ -197,13 +183,21 @@ def player2(): #player 2 algo
     print(*board[2], sep='')
     print('------------')
     print("O turn")
-    x1 = int(input("ROW: "))
-    y1 = int(input("COL: "))
+    try:
+        x1 = int(input("ROW: "))
+        y1 = int(input("COL: "))
     #piece = 'O'
-    if (x1 == 0 or x1 == 1 or x1 == 2) and (y1 == 0 or y1 == 1 or y1 == 2):
-        placePiece2(board,x1,y1,'|O|')
-    else: 
-        print("Invalid, place a piece again")
+    except:
+        print("Invalid Input, try again")
+        player2()
+    try:
+       if (x1 == 0 or x1 == 1 or x1 == 2) and (y1 == 0 or y1 == 1 or y1 == 2):
+           placePiece2(board,x1,y1,'|O|')
+       else: 
+           print("Invalid, place a piece again")
+           player2()
+    except:
+        print("Invalid Input, try again")
         player2()
     #isFilled()
     #winCheck2(board,piece)
@@ -211,4 +205,3 @@ def player2(): #player 2 algo
 
 if __name__ == "__main__": #pycharm runs it if this was set xdddddd
     main()
-
